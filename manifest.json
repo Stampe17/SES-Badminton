@@ -1,0 +1,21 @@
+{
+  "short_name": "SmashPro",
+  "name": "SmashPro Hub - Elite V4",
+  "icons": [
+    {
+      "src": "icon.jpg",
+      "type": "image/jpeg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon.jpg",
+      "type": "image/jpeg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./Index.html",
+  "background_color": "#0b0e14",
+  "theme_color": "#0b0e14",
+  "display": "standalone",
+  "orientation": "portrait"
+}
