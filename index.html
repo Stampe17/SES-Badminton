@@ -12,9 +12,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0b0e14">
-
-    <link rel="manifest" href="manifest.json">
     
+    <link rel="manifest" href="manifest.json">
+
     <!-- Biblioteker - ALTID i toppen -->
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
@@ -1623,34 +1623,38 @@ const challengeModule = {
         }
     },
 
-    sendChallenge() {
+ sendChallenge() {
         const type = document.getElementById('challenge-type-select').value;
         const days = parseInt(document.getElementById('challenge-duration-select').value);
         const mitNavn = AppState.profile?.name || AppState.user?.displayName || 'En spiller';
         const mitUid = AppState.user.uid;
 
         // =========================================================================
-        // 🔒 ANTI-SPAM SPÆRRING: TJEK OM SPILLEREN HAR 3 ELLER FLERE DYSTER IGANG
+        // 🔒 ULTRA-STRIKS ANTI-SPAM: TÆL KUN 'OPEN' OG 'ACCEPTED' I open_challenges
         // =========================================================================
         db.ref('open_challenges').once('value', snap => {
             const currentChallenges = snap.val() || {};
             let mineAktiveUdfordringer = 0;
 
             Object.values(currentChallenges).forEach(c => {
+                // Tjek om du deltager
                 if (c.senderId === mitUid || c.receiverId === mitUid) {
-                    mineAktiveUdfordringer++;
+                    // Vi tæller KUN hvis de er i gang. Gamle 'completed' dyster ignoreres fuldstændig!
+                    if (c.status === 'open' || c.status === 'accepted') {
+                        mineAktiveUdfordringer++;
+                    }
                 }
             });
 
-            // Hvis grænsen på 3 er nået, lukker vi menuen med det samme og viser fejlen!
+            // Hvis du har 3 dyster i gang, spærrer vi
             if (mineAktiveUdfordringer >= 3) {
-                this.closeCreateMenu(); // Sørger for at popuppen forsvinder, så toasten kan ses!
-                toast("❌ Du har allerede 3 dyster i gang eller afventende! Gennemfør dem først.");
-                return; // Afbryder, så der IKKE oprettes noget i Firebase
+                this.closeCreateMenu(); 
+                toast("❌ Du har allerede 3 aktive dyster i gang! Gennemfør dem først.");
+                return; 
             }
 
             // =========================================================================
-            // HVIS ALT ER OK, SENDES UDFORDRINGEN AFSTED SOM NORMALT:
+            // OPRETTER EN HELT FRISK DUEL
             // =========================================================================
             const openData = {
                 senderId: mitUid,
@@ -1731,8 +1735,8 @@ renderArena(challenges, mitUid) {
                 }
             }
 
-            // =========================================================================
-            // AUTOMATISK ARKIVERING: HVIS EN AKTIV DUEL ER UDLØBET (MED AUTOMATISK XP)
+ // =========================================================================
+            // 🧹 AUTOMATISK ARKIVERING: HVIS EN AKTIV DUEL ER UDLØBET (MED AUTOMATISK XP)
             // =========================================================================
             if (c.status === 'accepted' && c.acceptedAt) {
                 const udløbsDatoMs = c.acceptedAt + (c.duration * 24 * 60 * 60 * 1000);
@@ -1749,14 +1753,14 @@ renderArena(challenges, mitUid) {
                         vinderNavn = `🏆 Vinder: ${c.senderName}`;
                         xpTekst = `50 XP til ${c.senderName} / 10 XP til ${c.receiverName}`;
                         
-                        // Giv XP via sikre transktioner
+                        // Giv XP via sikre transaktioner
                         db.ref('xp_points/' + c.senderId).transaction(xp => (xp || 0) + 50);
                         db.ref('xp_points/' + c.receiverId).transaction(xp => (xp || 0) + 10);
                     } else if (slutReceiver > slutSender) {
                         vinderNavn = `🏆 Vinder: ${c.receiverName}`;
                         xpTekst = `50 XP til ${c.receiverName} / 10 XP til ${c.senderName}`;
                         
-                        // Giv XP via sikre transktioner
+                        // Giv XP via sikre transaktioner
                         db.ref('xp_points/' + c.receiverId).transaction(xp => (xp || 0) + 50);
                         db.ref('xp_points/' + c.senderId).transaction(xp => (xp || 0) + 10);
                     } else {
@@ -1775,7 +1779,8 @@ renderArena(challenges, mitUid) {
                         xpDistributed: xpTekst,
                         archivedAt: Date.now()
                     }).then(() => {
-                        db.ref('challenges/' + id).remove(); // Fjern den fra den aktive tavle
+                        // 🔥 FIX: Nu sletter vi den PERMANENT fra open_challenges tavlen!
+                        db.ref('open_challenges/' + id).remove(); 
                     });
                     return; // Spring resten over
                 }
