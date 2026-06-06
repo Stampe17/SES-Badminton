@@ -480,11 +480,11 @@ input, select {
             <small style="opacity:0.6; font-size:10px;">Taktisk analyse</small>
         </div>
 
-        <div class="kort" onclick="analyseModule.openModule('footwork')" style="text-align:center; border-bottom: 3px solid var(--primary); cursor:pointer;">
-            <div style="font-size:25px; margin-bottom:10px;">👟</div>
-            <b style="display:block; font-size:14px;">Benarbejde</b>
-            <small style="opacity:0.6; font-size:10px;">Hurtighed på banen</small>
-        </div>
+<div class="kort" onclick="window.analysisModule.openStrengthProgram()" style="text-align:center; border-bottom: 3px solid #00ff66; cursor:pointer;">
+    <div style="font-size:25px; margin-bottom:10px;">🏋️‍♂️</div>
+    <b style="display:block; font-size:14px;">Styrkeprogram</b>
+    <small style="opacity:0.6; font-size:10px;">1-3 gange om ugen</small>
+</div>
 
         <div class="kort" onclick="analyseModule.openModule('curve')" style="grid-column: span 2; display:flex; align-items:center; gap:15px; cursor:pointer;">
             <div style="font-size:20px;">📈</div>
@@ -1077,6 +1077,67 @@ input, select {
             <button onclick="challengeModule.sendChallenge()" style="flex: 2; padding: 12px; border-radius: 8px; background: #00ff66; color: black; font-weight: bold; border: none;">Send Udfordring!</button>
         </div>
     </div>
+</div>
+
+<!-- STYRKEPROGRAM MODAL OVERLAY -->
+<div id="strength-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(11,14,20,0.98); z-index:999999; overflow-y:auto; padding:20px; font-family:sans-serif; color:#fff; box-sizing:border-box;">
+    
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid #222; padding-bottom:15px; width:100%;">
+        <div>
+            <h2 style="color:#00ff66; margin:0; font-size:22px;">Styrkeprogram 🏋️‍♂️</h2>
+            <small style="color:gray;">Anbefales: 1-3 gange om ugen</small>
+        </div>
+        <button onclick="document.getElementById('strength-modal').style.display='none'" style="background:#222; color:white; border:none; padding:10px 16px; border-radius:8px; font-weight:bold; cursor:pointer;">Luk ✕</button>
+    </div>
+
+    <!-- KATEGORI 1: ANKLER, FØDDER & BALANCE -->
+    <div style="background:#161b26; border-radius:12px; padding:15px; margin-bottom:15px; border-left:4px solid #3b82f6;">
+        <h3 style="margin-top:0; color:#3b82f6; font-size:16px; display:flex; align-items:center; gap:8px;">🦶 1. Fødder & Balance</h3>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Et-bens balance:</b> 30 sek. med åbne øjne + 30 sek. med lukkede øjne (begge ben).</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Vip + Hop:</b> 15 kontrollerede vip på hvert ben efterfulgt af 15 eksplosive hink/hop.</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Tå-kryb:</b> Arbejd dig fremad udelukkende ved at krumme tæerne i 1 minut.</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Side-til-side hink:</b> Hink fra side til side på ét ben i 30 sekunder. Gentag på det andet.</div></li>
+        </ul>
+    </div>
+
+    <!-- KATEGORI 2: CORE & BENLØFT -->
+    <div style="background:#161b26; border-radius:12px; padding:15px; margin-bottom:15px; border-left:4px solid #a855f7;">
+        <h3 style="margin-top:0; color:#a855f7; font-size:16px; display:flex; align-items:center; gap:8px;">🎯 2. Core & Benstyrke</h3>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Siddende benløft (Et ben):</b> 2 sæt x 15 gentagelser + 10 sekunders statisk hold pr. ben. <i style="color:gray; display:block; font-size:12px;">Husk at strække benet og vristen helt ud!</i></div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Siddende benløft (Begge ben):</b> 1 sæt x 10 gentagelser med begge ben løftet samtidigt.</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Mavebøjninger m. ketcher:</b> 2 sæt x 15 gentagelser, hvor du holder ketcheren over hovedet.</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Hænder-til-fødder samlinger:</b> 3 sæt x 10 gentagelser (foldeknive / mave-samlinger).</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Power-mave kompleks:</b> 2 runder af: 15 sek. statisk hold ➔ 20 stk. benhævninger ➔ 25 alm. mavebøjninger.</div></li>
+        </ul>
+    </div>
+
+    <!-- KATEGORI 3: OVERKROP, RYG & POSITIONER -->
+    <div style="background:#161b26; border-radius:12px; padding:15px; margin-bottom:15px; border-left:4px solid #eab308;">
+        <h3 style="margin-top:0; color:#eab308; font-size:16px; display:flex; align-items:center; gap:8px;">🦾 3. Overkrop & Ryg</h3>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Skulderskift m/vægt:</b> Liggende på maven. Kør vægten rundt om kroppen: 6 gange med uret, 6 gange mod uret. Gentag i 2 sæt.</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Ryg- & Benløft kombi:</b> 2 sæt x 15 rygløft + 2 sæt x 15 benløft (liggende på maven).</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Positions-armbøjninger:</b> 2 runder af: 5 x 5 forskellige armbøjningspositioner (fx bred, smal, forskudt) i træk uden pause.</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Diagonalløft (Kryds-balance):</b> Højre ben/venstre arm & venstre ben/højre arm. Hold spændingen 2 x 15 sekunder på hver side.</div></li>
+        </ul>
+    </div>
+
+    <!-- KATEGORI 4:FUNKTIONEL FYSIK & AFSLUTNING -->
+    <div style="background:#161b26; border-radius:12px; padding:15px; margin-bottom:25px; border-left:4px solid #00ff66;">
+        <h3 style="margin-top:0; color:#00ff66; font-size:16px; display:flex; align-items:center; gap:8px;">🐊 4. Funktionel Bevægelse & Finish</h3>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Krabbegang kun med armene:</b> Gå ca. 5 meter i krabbegang, hvor benene SKAL slæbes totalt efter dig og ikke må hjælpe til!</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Lodret hop m. optræk på bænk:</b> Eksplosive hop på ét ben op på en bænk/skammel. 2 sæt x 10 gentagelser på hvert ben.</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Planken:</b> Hold den i max tid, du overhovedet kan. Gentag 2 gange! ⏱️</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Hælegang med hænder i gulv:</b> Gå 10 meter fremad, hvor kun dine hæle og håndflader rører underlaget.</div></li>
+            <li style="display:flex; align-items:start; gap:10px; font-size:14px;"><input type="checkbox" style="transform:scale(1.2); margin-top:3px;"> <div><b>Udstrækning:</b> Slut af med grundig udstrækning af mave, ryg, ben og skuldre. 🧘‍♂️</div></li>
+        </ul>
+    </div>
+
+    <!-- Done-knap i bunden -->
+    <button onclick="document.getElementById('strength-modal').style.display='none'; toast('Mega godt kæmpet! 💪🔥')" style="background:#00ff66; color:black; width:100%; padding:18px; border-radius:12px; font-weight:900; border:none; font-size:16px; cursor:pointer;">TRÆNING GENNEMFØRT ✅</button>
 </div>
 
 <script>
@@ -1964,7 +2025,10 @@ getReadableType(type) {
 };
 
 // --- 5. ANALYSE MODUL ---
-const analysisModule = {
+// =========================================================================
+// 🚀 100% SIKRET & RETTET PERFORMANCE MODUL (Nu koblet rigtigt til knappen!)
+// =========================================================================
+window.analysisModule = {
     radarChart: null,
     attendanceChart: null,
     balanceChart: null,
@@ -2026,7 +2090,7 @@ const analysisModule = {
         if (menu) menu.classList.remove('hidden');
     },
 
-    // 3. Dashboard samler (Det er denne der fejlede før)
+    // 3. Dashboard samler
     renderActivityDashboard() {
         this.renderAttendance();
         this.renderBalance();
@@ -2047,7 +2111,7 @@ const analysisModule = {
 
         allTrainings.forEach(t => {
             const participants = t.participants || {};
-            if (participants[uid] && t.date) { // Vi bruger 'date' fra dit Firebase billede
+            if (participants[uid] && t.date) {
                 const tDato = new Date(t.date);
                 if (!isNaN(tDato)) {
                     const diffDage = Math.floor((nu - tDato) / (1000 * 60 * 60 * 24));
@@ -2084,7 +2148,7 @@ const analysisModule = {
         });
     },
 
-// 5. Cirkeldiagrammet (Fordeling - Låst til de seneste 30 dage)
+    // 5. Cirkeldiagrammet (Fordeling - Låst til de seneste 30 dage)
     renderBalance() {
         const canvas = document.getElementById('balanceChart');
         if (!canvas) return;
@@ -2092,28 +2156,17 @@ const analysisModule = {
 
         const uid = AppState.user.uid;
         const allTrainings = Object.values(AppState.trainings || {});
-        
-        // Vi opretter kasserne til jeres kategorier
         const types = { 'Badminton': 0, 'Styrke': 0, 'Løb': 0 };
-        
-        // BEREGN SKÆRINGSDATOEN: Find tidsstemplet for præcis 30 dage siden
         const enDagIMillisekunder = 24 * 60 * 60 * 1000;
         const for30DageSidenTidsstempel = Date.now() - (30 * enDagIMillisekunder);
 
         allTrainings.forEach(t => {
             const participants = t.participants || {};
-            
-            // 1. Tjek om spilleren har deltaget ('ja')
             const harDeltaget = participants[uid] && (participants[uid].status === 'ja' || participants[uid].status === 'deltaget');
-            
-            // 2. Tjek om træningen er foregået inden for de seneste 30 dage
             const indenFor30Dage = t.timestamp >= for30DageSidenTidsstempel;
 
             if (harDeltaget && indenFor30Dage) {
-                // Hent kategorien/titlen og gør den til små bogstaver, så vi kan matche alt
                 const s = (t.category || t.title || t.type || "").toLowerCase();
-                
-                // Fordel træningspassene i de rigtige kasser (inkl. Malaysia og Denmark Open-kategorierne)
                 if (s.includes('badm') || s.includes('denmark')) {
                     types['Badminton']++;
                 } else if (s.includes('styrke') || s.includes('fys') || s.includes('fit')) {
@@ -2126,7 +2179,6 @@ const analysisModule = {
 
         const total = types['Badminton'] + types['Styrke'] + types['Løb'];
         
-        // Tegn diagrammet på skærmen ud fra jeres 30-dages data
         this.balanceChart = new Chart(canvas.getContext('2d'), {
             type: 'pie',
             data: {
@@ -2140,9 +2192,18 @@ const analysisModule = {
             },
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
         });
+    },
+
+    // 6. Det nye styrkeprogram modul
+    openStrengthProgram() {
+        const modal = document.getElementById('strength-modal');
+        if (modal) {
+            modal.style.display = 'block';
+        } else {
+            console.error("Kunne ikke finde id'et strength-modal i HTML'en!");
+        }
     }
 };
-
 // =========================================================================
 // SIMPLE MANUEL MONRAD TURNERINGSSYSTEM (INPUT BASERET)
 // =========================================================================
