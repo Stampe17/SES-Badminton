@@ -3932,70 +3932,70 @@ db.ref('users').on('value', snapshot => {
 
 // Vi bruger window. for at sikre, at der ikke opstår 'redeclare' fejl
 window.badgeModule = {
-    udfordringer: [
+udfordringer: [
         // --- 1-15: TRÆNINGSANTAL ---
-        { id: 1, kat: "træning", titel: "First Step", desc: "1 træning", check: (s) => s.total >= 1 },
-        { id: 2, kat: "træning", titel: "Hat-Trick", desc: "3 træninger", check: (s) => s.total >= 3 },
-        { id: 3, kat: "træning", titel: "High Five", desc: "5 træninger", check: (s) => s.total >= 5 },
-        { id: 4, kat: "træning", titel: "Consistent", desc: "10 træninger", check: (s) => s.total >= 10 },
-        { id: 5, kat: "træning", titel: "Club 15", desc: "15 træninger", check: (s) => s.total >= 15 },
-        { id: 6, kat: "træning", titel: "Dedicated", desc: "20 træninger", check: (s) => s.total >= 20 },
-        { id: 7, kat: "træning", titel: "Routine", desc: "25 træninger", check: (s) => s.total >= 25 },
-        { id: 8, kat: "træning", titel: "Grinder", desc: "30 træninger", check: (s) => s.total >= 30 },
-        { id: 9, kat: "træning", titel: "Athlete", desc: "40 træninger", check: (s) => s.total >= 40 },
-        { id: 10, kat: "træning", titel: "Pro Player", desc: "50 træninger", check: (s) => s.total >= 50 },
-        { id: 11, kat: "træning", titel: "Elite", desc: "60 træninger", check: (s) => s.total >= 60 },
-        { id: 12, kat: "træning", titel: "Workhorse", desc: "70 træninger", check: (s) => s.total >= 70 },
-        { id: 13, kat: "træning", titel: "Master", desc: "80 træninger", check: (s) => s.total >= 80 },
-        { id: 14, kat: "træning", titel: "Veteran", desc: "90 træninger", check: (s) => s.total >= 90 },
-        { id: 15, kat: "træning", titel: "Centurion", desc: "100 træninger", check: (s) => s.total >= 100 },
+        { id: 1, kat: "træning", titel: "First Step 🌱", desc: "1 træning", check: (s) => s.total >= 1 },
+        { id: 2, kat: "træning", titel: "Hat-Trick 🎩", desc: "3 træninger", check: (s) => s.total >= 3 },
+        { id: 3, kat: "træning", titel: "High Five 🖐️", desc: "5 træninger", check: (s) => s.total >= 5 },
+        { id: 4, kat: "træning", titel: "Consistent 🗓️", desc: "10 træninger", check: (s) => s.total >= 10 },
+        { id: 5, kat: "træning", titel: "Club 15 🎯", desc: "15 træninger", check: (s) => s.total >= 15 },
+        { id: 6, kat: "træning", titel: "Dedicated 💪", desc: "20 træninger", check: (s) => s.total >= 20 },
+        { id: 7, kat: "træning", titel: "Routine 🔄", desc: "25 træninger", check: (s) => s.total >= 25 },
+        { id: 8, kat: "træning", titel: "Grinder 🧱", desc: "30 træninger", check: (s) => s.total >= 30 },
+        { id: 9, kat: "træning", titel: "Athlete 🏃", desc: "40 træninger", check: (s) => s.total >= 40 },
+        { id: 10, kat: "træning", titel: "Pro Player 🏸", desc: "50 træninger", check: (s) => s.total >= 50 },
+        { id: 11, kat: "træning", titel: "Elite 🎖️", desc: "60 træninger", check: (s) => s.total >= 60 },
+        { id: 12, kat: "træning", titel: "Workhorse 🐎", desc: "70 træninger", check: (s) => s.total >= 70 },
+        { id: 13, kat: "træning", titel: "Master 🥋", desc: "80 træninger", check: (s) => s.total >= 80 },
+        { id: 14, kat: "træning", titel: "Veteran 🎖️", desc: "90 træninger", check: (s) => s.total >= 90 },
+        { id: 15, kat: "træning", titel: "Centurion 💯", desc: "100 træninger", check: (s) => s.total >= 100 },
 
         // --- 16-25: MINUTTER ---
-        { id: 16, kat: "minutter", titel: "Warmup", desc: "500 minutter totalt", check: (s) => s.mins >= 500 },
-        { id: 17, kat: "minutter", titel: "Deep Dive", desc: "1000 minutter totalt", check: (s) => s.mins >= 1000 },
-        { id: 18, kat: "minutter", titel: "Hard Work", desc: "2000 minutter totalt", check: (s) => s.mins >= 2000 },
-        { id: 19, kat: "minutter", titel: "Power", desc: "3000 minutter totalt", check: (s) => s.mins >= 3000 },
-        { id: 20, kat: "minutter", titel: "Endurance", desc: "4000 minutter totalt", check: (s) => s.mins >= 4000 },
-        { id: 21, kat: "minutter", titel: "Machine", desc: "5000 minutter totalt", check: (s) => s.mins >= 5000 },
-        { id: 22, kat: "minutter", titel: "Stamina", desc: "7500 minutter totalt", check: (s) => s.mins >= 7500 },
-        { id: 23, kat: "minutter", titel: "Ironman", desc: "10.000 minutter totalt", check: (s) => s.mins >= 10000 },
-        { id: 24, kat: "minutter", titel: "Ultra", desc: "12.500 minutter totalt", check: (s) => s.mins >= 12500 },
-        { id: 25, kat: "minutter", titel: "Marathon", desc: "15.000 minutter totalt", check: (s) => s.mins >= 15000 },
+        { id: 16, kat: "minutter", titel: "Warmup 🥵", desc: "500 minutter totalt", check: (s) => s.mins >= 500 },
+        { id: 17, kat: "minutter", titel: "Deep Dive 🤿", desc: "1000 minutter totalt", check: (s) => s.mins >= 1000 },
+        { id: 18, kat: "minutter", titel: "Hard Work 🏋️", desc: "2000 minutter totalt", check: (s) => s.mins >= 2000 },
+        { id: 19, kat: "minutter", titel: "Power ⚡", desc: "3000 minutter totalt", check: (s) => s.mins >= 3000 },
+        { id: 20, kat: "minutter", titel: "Endurance 🧗", desc: "4000 minutter totalt", check: (s) => s.mins >= 4000 },
+        { id: 21, kat: "minutter", titel: "Machine 🤖", desc: "5000 minutter totalt", check: (s) => s.mins >= 5000 },
+        { id: 22, kat: "minutter", titel: "Stamina 🫁", desc: "7500 minutter totalt", check: (s) => s.mins >= 7500 },
+        { id: 23, kat: "minutter", titel: "Ironman 🦾", desc: "10.000 minutter totalt", check: (s) => s.mins >= 10000 },
+        { id: 24, kat: "minutter", titel: "Ultra 🪐", desc: "12.500 minutter totalt", check: (s) => s.mins >= 12500 },
+        { id: 25, kat: "minutter", titel: "Marathon 🌍", desc: "15.000 minutter totalt", check: (s) => s.mins >= 15000 },
 
         // --- 26-33: SPEED & TID ---
-        { id: 26, kat: "tid", titel: "Early Bird", desc: "Træn før kl. 08:00", check: (s) => s.time_early },
-        { id: 27, kat: "tid", titel: "Night Owl", desc: "Træn efter kl. 20:00", check: (s) => s.time_late },
-        { id: 28, kat: "tid", titel: "Double Up", desc: "2 træninger på én dag", check: (s) => s.day_double },
-        { id: 29, kat: "speed", titel: "Speed 100", desc: "Smash over 100 km/t", check: (s) => s.topSpeed >= 100 },
-        { id: 30, kat: "speed", titel: "Speed 200", desc: "Smash over 200 km/t", check: (s) => s.topSpeed >= 200 },
-        { id: 31, kat: "speed", titel: "Speed 300", desc: "Smash over 300 km/t", check: (s) => s.topSpeed >= 300 },
-        { id: 32, kat: "speed", titel: "Speed 350", desc: "Smash over 350 km/t", check: (s) => s.topSpeed >= 350 },
-        { id: 33, kat: "speed", titel: "Sonic Smash", desc: "Smash over 400 km/t", check: (s) => s.topSpeed >= 400 },
+        { id: 26, kat: "tid", titel: "Early Bird 🌅", desc: "Træn før kl. 08:00", check: (s) => s.time_early },
+        { id: 27, kat: "tid", titel: "Night Owl 🌌", desc: "Træn efter kl. 20:00", check: (s) => s.time_late },
+        { id: 28, kat: "tid", titel: "Double Up ♊", desc: "2 træninger på én dag", check: (s) => s.day_double },
+        { id: 29, kat: "speed", titel: "Speed 100 🏎️", desc: "Smash over 100 km/t", check: (s) => s.topSpeed >= 100 },
+        { id: 30, kat: "speed", titel: "Speed 200 🚀", desc: "Smash over 200 km/t", check: (s) => s.topSpeed >= 200 },
+        { id: 31, kat: "speed", titel: "Speed 300 ☄️", desc: "Smash over 300 km/t", check: (s) => s.topSpeed >= 300 },
+        { id: 32, kat: "speed", titel: "Speed 350 ⚡", desc: "Smash over 350 km/t", check: (s) => s.topSpeed >= 350 },
+        { id: 33, kat: "speed", titel: "Sonic Smash 💥", desc: "Smash over 400 km/t", check: (s) => s.topSpeed >= 400 },
 
         // --- 34-45: FYSISK & MENTAL ---
-        { id: 34, kat: "fysisk", titel: "Cooper 2500", desc: "Løb over 2500m", check: (s) => s.maxCooper >= 2500 },
-        { id: 35, kat: "fysisk", titel: "Cooper 2700", desc: "Løb over 2700m", check: (s) => s.maxCooper >= 2700 },
-        { id: 36, kat: "fysisk", titel: "Cooper 2900", desc: "Løb over 2900m", check: (s) => s.maxCooper >= 2900 },
-        { id: 37, kat: "fysisk", titel: "Cooper Elite", desc: "Løb over 3050m", check: (s) => s.maxCooper >= 3050 },
-        { id: 38, kat: "mental", titel: "Max Power", desc: "Motivation på 10", check: (s) => s.mot10Count >= 1 },
-        { id: 39, kat: "mental", titel: "Mental Rock", desc: "5 træninger m. motivation 10", check: (s) => s.mot10Count >= 5 },
-        { id: 41, kat: "mental", titel: "Super Star", desc: "10 træninger m. motivation 10", check: (s) => s.mot10Count >= 10 },
-        { id: 42, kat: "mental", titel: "Mindset King", desc: "20 træninger m. motivation 10", check: (s) => s.mot10Count >= 20 },
-        { id: 43, kat: "uge", titel: "Weekly 3", desc: "Træn 3 gange på én uge", check: (s) => s.maxInWeek >= 3 },
-        { id: 44, kat: "uge", titel: "Weekly 5", desc: "Træn 5 gange på én uge", check: (s) => s.maxInWeek >= 5 },
-        { id: 45, kat: "uge", titel: "Weekly 7", desc: "Træn hver dag i en uge", check: (s) => s.maxInWeek >= 7 },
+        { id: 34, kat: "fysisk", titel: "Cooper 2500 👟", desc: "Løb over 2500m", check: (s) => s.maxCooper >= 2500 },
+        { id: 35, kat: "fysisk", titel: "Cooper 2700 🏃‍♂️", desc: "Løb over 2700m", check: (s) => s.maxCooper >= 2700 },
+        { id: 36, kat: "fysisk", titel: "Cooper 2900 💨", desc: "Løb over 2900m", check: (s) => s.maxCooper >= 2900 },
+        { id: 37, kat: "fysisk", titel: "Cooper Elite 🔥", desc: "Løb over 3050m", check: (s) => s.maxCooper >= 3050 },
+        { id: 38, kat: "mental", titel: "Max Power ⚡", desc: "Motivation på 10", check: (s) => s.mot10Count >= 1 },
+        { id: 39, kat: "mental", titel: "Mental Rock 🪨", desc: "5 træninger m. motivation 10", check: (s) => s.mot10Count >= 5 },
+        { id: 41, kat: "mental", titel: "Super Star ⭐", desc: "10 træninger m. motivation 10", check: (s) => s.mot10Count >= 10 },
+        { id: 42, kat: "mental", titel: "Mindset King 👑", desc: "20 træninger m. motivation 10", check: (s) => s.mot10Count >= 20 },
+        { id: 43, kat: "uge", titel: "Weekly 3 📅", desc: "Træn 3 gange på én uge", check: (s) => s.maxInWeek >= 3 },
+        { id: 44, kat: "uge", titel: "Weekly 5 🗓️", desc: "Træn 5 gange på én uge", check: (s) => s.maxInWeek >= 5 },
+        { id: 45, kat: "uge", titel: "Weekly 7 🏆", desc: "Træn hver dag i en uge", check: (s) => s.maxInWeek >= 7 },
 
         // --- 46-60: SPECIALS & ELITE ---
-        { id: 46, kat: "special", titel: "Malaysia Tour", desc: "Deltaget i Malaysia træning", check: (s) => s.hasMalaysia },
-        { id: 47, kat: "special", titel: "Copenhagen", desc: "Denmark Open deltagelse", check: (s) => s.hasDenmarkOpen },
-        { id: 48, kat: "special", titel: "Malaysia Runner", desc: "Gennemført Malaysia løb", check: (s) => s.hasMalaysiaRace },
-        { id: 49, kat: "special", titel: "Gym Rat", desc: "Trænet styrke 5 gange", check: (s) => s.strengthCount >= 5 },
-        { id: 50, kat: "special", titel: "Runner", desc: "Løbetræning 5 gange", check: (s) => s.runCount >= 5 },
-        { id: 51, kat: "elite", titel: "Månedens Slider", desc: "Trænet i 4 uger i træk", check: (s) => s.streak4Weeks },
-        { id: 52, kat: "elite", titel: "Ambassadør", desc: "Data i alle moduler", check: (s) => s.isAmbassador },
-        { id: 54, kat: "elite", titel: "All-Rounder", desc: "Styrke, løb og badminton", check: (s) => s.isAllRounder },
-        { id: 58, kat: "elite", titel: "Century Eval", desc: "100 evalueringer", check: (s) => s.evalCount >= 100 },
-        { id: 60, kat: "elite", titel: "SmashPro Legend", desc: "100+ træninger & Ambassadør", check: (s) => s.total >= 100 && s.isAmbassador },
+        { id: 46, kat: "special", titel: "Malaysia Tour ✈️", desc: "Deltaget i Malaysia træning", check: (s) => s.hasMalaysia },
+        { id: 47, kat: "special", titel: "Copenhagen 🇩🇰", desc: "Denmark Open deltagelse", check: (s) => s.hasDenmarkOpen },
+        { id: 48, kat: "special", titel: "Malaysia Runner 🏁", desc: "Gennemført Malaysia løb", check: (s) => s.hasMalaysiaRace },
+        { id: 49, kat: "special", titel: "Gym Rat 🐀", desc: "Trænet styrke 5 gange", check: (s) => s.strengthCount >= 5 },
+        { id: 50, kat: "special", titel: "Runner 🏃", desc: "Løbetræning 5 gange", check: (s) => s.runCount >= 5 },
+        { id: 51, kat: "elite", titel: "Månedens Slider ⏳", desc: "Trænet i 4 uger i træk", check: (s) => s.streak4Weeks },
+        { id: 52, kat: "elite", titel: "Ambassadør 💼", desc: "Data i alle moduler", check: (s) => s.isAmbassador },
+        { id: 54, kat: "elite", titel: "All-Rounder 🎡", desc: "Styrke, løb og badminton", check: (s) => s.isAllRounder },
+        { id: 58, kat: "elite", titel: "Century Eval 💯", desc: "100 evalueringer", check: (s) => s.evalCount >= 100 },
+        { id: 60, kat: "elite", titel: "SmashPro Legend 🌟", desc: "100+ træninger & Ambassadør", check: (s) => s.total >= 100 && s.isAmbassador },
 
         // --- 64-68 & 72-77: MATCH & DRAMA ---
         { id: 64, kat: "match", titel: "Isen er brudt 🧊", desc: "Vind din første kamp", check: (s) => s.wins >= 1 },
@@ -4008,12 +4008,12 @@ window.badgeModule = {
         { id: 75, kat: "match", titel: "Point-maskinen 🔢", desc: "100 point totalt i kampe", check: (s) => s.total_match_points >= 100 },
         { id: 76, kat: "match", titel: "Uendelig duel ♾️", desc: "120 point totalt i kampe", check: (s) => s.total_match_points >= 120 },
         { id: 77, kat: "match", titel: "Lærestregen 🎓", desc: "Tab efter vundet 1. sæt", check: (s) => s.lost_after_first },
-        { id: 40, kat: "match", titel: "Comeback Kid", desc: "Tab 1. sæt - vind kampen", check: (s) => s.hasComeback },
+        { id: 40, kat: "match", titel: "Comeback Kid 🏹", desc: "Tab 1. sæt - vind kampen", check: (s) => s.hasComeback },
 
         // --- HEMMELIGE BADGES ---
-        { id: 61, kat: "secret", titel: "The Machine", desc: "Trænet 7 dage i træk", check: (s) => s.streak7Days, secret: true },
-        { id: 62, kat: "secret", titel: "Elite Athlete", desc: "Over 300 km/t & 3000m løb", check: (s) => s.topSpeed >= 300 && s.maxCooper >= 3000, secret: true },
-        { id: 63, kat: "secret", titel: "Dedicated Fan", desc: "Tjekket badges midt om natten", check: (s) => s.isNightOwl, secret: true },
+        { id: 61, kat: "secret", titel: "The Machine ⚙️", desc: "Trænet 7 dage i træk", check: (s) => s.streak7Days, secret: true },
+        { id: 62, kat: "secret", titel: "Elite Athlete 🌪️", desc: "Over 300 km/t & 3000m løb", check: (s) => s.topSpeed >= 300 && s.maxCooper >= 3000, secret: true },
+        { id: 63, kat: "secret", titel: "Dedicated Fan 🦉", desc: "Tjekket badges midt om natten", check: (s) => s.isNightOwl, secret: true },
         { id: 69, kat: "secret", titel: "Muren 🧱", desc: "Hold modstanderen under 20 point", check: (s) => s.match_under20, secret: true },
         { id: 70, kat: "secret", titel: "Total Dominans 🔥", desc: "Hold modstanderen under 10 point", check: (s) => s.match_under10, secret: true },
         { id: 71, kat: "secret", titel: "Det Perfekte Sæt 🎯", desc: "Vind et sæt 21-0", check: (s) => s.perfect_set, secret: true },
@@ -4234,68 +4234,70 @@ calculateStats(uid, allT, allRunTests, matches) {
         return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
     },
 
- render(stats) {
+render(stats) {
     const container = document.getElementById('badge-container');
-    if (!container) return;
+    if (!container || !AppState.user) return;
+    const uid = AppState.user.uid;
     container.innerHTML = "";
     
-    let vundneCount = 0;
-    const sorteret = [...this.udfordringer].sort((a, b) => (a.kat === 'secret') - (b.kat === 'secret'));
-
-    // Hent liste over badges vi allerede har fejret
-    let fejredeBadges = JSON.parse(localStorage.getItem('smashpro_badges_v4') || "[]");
-    let nyeBadgesFundet = false;
-
-    sorteret.forEach(u => {
-        const vundet = u.check(stats);
-        if (vundet) {
-            vundneCount++; 
-            
-            // Tjek om dette er et NYT badge (ikke i vores localStorage liste)
-            if (!fejredeBadges.includes(u.id)) {
-                // 1. Bestem XP (100 for secret, 50 for resten)
-                const xpGevinst = u.secret ? 100 : 50;
-                
-                // 2. GIV XP DIREKTE VIA FIREBASE (Den sikre metode uden addXP)
-                const uid = AppState.user.uid;
-                db.ref('xp_points/' + uid).transaction(currentXP => {
-                    return (currentXP || 0) + xpGevinst;
-                });
-
-                // 3. Vis Toast med point-info
-                toast(`NYT BADGE: ${u.titel} (+${xpGevinst} XP) 🏆`, "badge");
-                
-                // 4. Gem i listen over fejrede badges
-                fejredeBadges.push(u.id);
-                nyeBadgesFundet = true;
-            }
-        }
-
-        const erSecret = u.secret && !vundet;
+    // 🔥 Database-sikring: Hent de badges, som profilen ALLEREDE har fået udbetalt XP for i Firebase
+    db.ref('vundne_badges/' + uid).once('value', snapshot => {
+        const udbetalteBadgesIBasen = snapshot.val() || {};
         
-        container.innerHTML += `
-            <div class="kort badge-item ${vundet ? 'vundet' : 'laast'}">
-                <div class="badge-icon">${vundet ? '🏆' : (erSecret ? '❓' : '🔒')}</div>
-                <div class="badge-text">
-                    <b>${erSecret ? '???' : (typeof u.titel === 'function' ? u.titel(stats) : u.titel)}</b>
-                    <small>${erSecret ? 'Hemmelig udfordring' : (typeof u.desc === 'function' ? u.desc(stats) : u.desc)}</small>
-                </div>
-            </div>`;
-    });
-    
-    // Gem den opdaterede liste i localStorage, hvis der var nye
-    if (nyeBadgesFundet) {
-        localStorage.setItem('smashpro_badges_v4', JSON.stringify(fejredeBadges));
-    }
-    
-    // Opdater statistikken i toppen af badge-siden
-    const elTotal = document.getElementById('badge-traening-count');
-    const elMins = document.getElementById('badge-minut-count');
-    const elUnlocked = document.getElementById('stat-unlocked');
+        let vundneCount = 0;
+        const sorteret = [...this.udfordringer].sort((a, b) => (a.kat === 'secret') - (b.kat === 'secret'));
 
-    if(elTotal) elTotal.innerText = stats.total || 0;
-    if(elMins) elMins.innerText = stats.mins || 0;
-    if(elUnlocked) elUnlocked.innerText = vundneCount + "/77";
+        sorteret.forEach(u => {
+            const vundet = u.check(stats);
+            if (vundet) {
+                vundneCount++; 
+                
+                // 🔒 Tjek om dette badge ALDRIG er gemt i Firebase før
+                if (!udbetalteBadgesIBasen[u.id]) {
+                    const xpGevinst = u.secret ? 100 : 50;
+                    
+                    // 1. Gem badget permanent i databasen under spillerens profil, så det ALDRIG kan nulstilles
+                    db.ref(`vundne_badges/${uid}/${u.id}`).set(true);
+
+                    // 2. GIV XP DIREKTE VIA FIREBASE (Udbetales nu kun én eneste gang i historien!)
+                    db.ref('xp_points/' + uid).transaction(currentXP => {
+                        return (currentXP || 0) + xpGevinst;
+                    });
+
+                    // 3. Vis Toast med point-info
+                    toast(`NYT BADGE: ${typeof u.titel === 'function' ? u.titel(stats) : u.titel} (+${xpGevinst} XP) 🏆`, "badge");
+                }
+            }
+
+            // --- PERMANENT NATTERAVN-FIX ---
+            // Hvis det er det hemmelige badge med nat-tjek (ID: 63), og de allerede HAR fået det før i basen,
+            // så gennemtvinger vi, at det forbliver ægte vundet på skærmen!
+            let reeltVundet = vundet;
+            if (u.id === 63 && udbetalteBadgesIBasen[63]) {
+                reeltVundet = true;
+            }
+
+            const erSecret = u.secret && !reeltVundet;
+            
+            container.innerHTML += `
+                <div class="kort badge-item ${reeltVundet ? 'vundet' : 'laast'}">
+                    <div class="badge-icon">${reeltVundet ? '🏆' : (erSecret ? '❓' : '🔒')}</div>
+                    <div class="badge-text">
+                        <b>${erSecret ? '???' : (typeof u.titel === 'function' ? u.titel(stats) : u.titel)}</b>
+                        <small>${erSecret ? 'Hemmelig udfordring' : (typeof u.desc === 'function' ? u.desc(stats) : u.desc)}</small>
+                    </div>
+                </div>`;
+        });
+        
+        // Opdater statistikken i toppen af badge-siden
+        const elTotal = document.getElementById('badge-traening-count');
+        const elMins = document.getElementById('badge-minut-count');
+        const elUnlocked = document.getElementById('stat-unlocked');
+
+        if(elTotal) elTotal.innerText = stats.total || 0;
+        if(elMins) elMins.innerText = stats.mins || 0;
+        if(elUnlocked) elUnlocked.innerText = vundneCount + "/77";
+    });
 }
 };
 
