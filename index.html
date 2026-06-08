@@ -1978,6 +1978,8 @@ renderArena(challenges, mitUid) {
     },
 
 calculateLiveStat(uid, type, startTimestamp, allTrainings) {
+        if (!allTrainings) allTrainings = [];
+
         let relevante = allTrainings.filter(t => {
             return t.timestamp >= startTimestamp && t.participants && t.participants[uid] && t.participants[uid].status === 'ja';
         });
@@ -1987,31 +1989,43 @@ calculateLiveStat(uid, type, startTimestamp, allTrainings) {
         if (type === 'motivation') {
             let evals = relevante.filter(t => t.evaluations && t.evaluations[uid] && t.evaluations[uid].mot);
             if (!evals.length) return 0;
-            return (evals.reduce((acc, t) => acc + parseInt(t.evaluations[uid].mot), 0) / evals.length).toFixed(1);
+            return parseFloat((evals.reduce((acc, t) => acc + parseInt(t.evaluations[uid].mot), 0) / evals.length).toFixed(1));
         }
 
         // =========================================================================
-        // 🏃‍♂️ KILOMETER-JÆGER: LÆGGER ALLE KM SAMMEN FRA LØB INDEN FOR DYSTENS PERIODE
+        // 🏃‍♂️ LØB: SIKKER HENTNING UDEN AT CRASHE MENUEN
         // =========================================================================
         if (type === 'morning') {
-            // Hent alle løbeture fra jeres rigtige, aktive systemskuffe
-            const run_tests = Object.values(window.allRunTests || AppState.run_tests || {});
+            // Sikker måde at hente jeres test-data på, uden at Javascript går i baglås
+            let testData = {};
+            if (typeof AppState !== 'undefined') {
+                testData = AppState.run_tests || AppState.tests || {};
+            }
+            if (Object.keys(testData).length === 0 && typeof allRunTests !== 'undefined') {
+                testData = allRunTests;
+            }
             
-            // Filtrér så vi KUN tager løbeture for denne specifikke spiller, som er løbet EFTER duellen startede
-            let mineDystLoeb = run_tests.filter(r => r.uid === uid && r.timestamp >= startTimestamp);
-            if (!mineDystLoeb.length) return 0;
+            const alleTestResultater = Object.values(testData || {});
             
-            // Læg alle meterne sammen på de løbeture, der ligger i perioden
-            let samledeMeter = mineDystLoeb.reduce((total, r) => {
-                let meterPaaTur = parseInt(r.val1 || r.distance || r.meter || 0);
-                return total + meterPaaTur;
+            let mineLoeb = alleTestResultater.filter(r => {
+                const rTime = r.timestamp || 0;
+                return r.uid === uid && rTime >= startTimestamp;
+            });
+
+            if (!mineLoeb.length) return 0;
+
+            let samledeMeter = mineLoeb.reduce((total, r) => {
+                let meter = parseInt(r.distance || r.meter || r.val1 || 0);
+                if (isNaN(meter)) meter = 0;
+                return total + meter;
             }, 0);
+
+            // Dividerer med 1000 for at lave meter om til km!
+            let samledeKm = samledeMeter / 1000;
             
-            // Lav meter om til kilometer med 1 decimal (f.eks. 5200 meter bliver til 5.2 km)
-            let samledeKm = (samledeMeter / 1000).toFixed(1);
-            
-            return parseFloat(samledeKm); // Returnerer det som et tal, så jeres live-barometer kan stige!
+            return parseFloat(samledeKm.toFixed(1));
         }
+
         return 0;
     },
 
@@ -3756,25 +3770,26 @@ checkLevel(type, val) {
         date: new Date().toISOString().split('T')[0]
     };
 
-try {
+    try {
         // =========================================================================
-        // SPECIALHÅNDTERING AF VALGFRI DISTANCE ('fri') - INGEN XP ELLER REKORD!
+        // SPECIALHÅNDTERING AF VALGFRI DISTANCE ('fri') 
         // =========================================================================
         if (type === 'fri') {
-            // Gemmer løbeturen direkte i databasen med det samme
             await db.ref('run_tests').push(data);
-            
-            // Jeres helt nye motiverende tekst uden XP:
             toast("Stærkt arbejdet, flere km i banken! 🏃‍♂️💨");
             
-            // Lukker popuppen og genstarter analyse-graferne live
-            document.getElementById('modal-run-test').classList.add('hidden');
-            if (window.analysisModule) analysisModule.init();
-            if (window.analyseModule) analyseModule.init();
-            return; // STOPPER FUNKTIONEN HER så den ikke tjekker XP/rekorder!
+            // SIKKER UI LUKNING - Forhindrer appen i at crashe!
+            const modal = document.getElementById('modal-run-test');
+            if (modal) modal.classList.add('hidden');
+            try {
+                if (window.analysisModule) analysisModule.init();
+                if (window.analyseModule) analyseModule.init();
+            } catch(e) { console.log("Kunne ikke opdatere grafer, men data er gemt."); }
+            
+            return; 
         }
 
-        // --- 1. TJEK FOR REKORD / FØRSTE GANG (Kører kun for officielle test) ---
+        // --- 1. TJEK FOR REKORD / FØRSTE GANG ---
         const snap = await db.ref('run_tests').orderByChild('uid').equalTo(uid).once('value');
         const tests = snap.val() ? Object.values(snap.val()) : [];
         const mineAfDenneType = tests.filter(t => t.type === type);
@@ -3793,7 +3808,6 @@ try {
                 return parseFloat(str);
             };
             
-            // Vi tilføjer ttest her, så den bruger tidssortering (min) i stedet for point (max)
             const mineVærdier = mineAfDenneType.map(t => (type === '5km' || type === '10km' || type === 'ttest') ? timeToSec(t.val1) : parseFloat(t.val1));
             const nuværendeVærdi = (type === '5km' || type === '10km' || type === 'ttest') ? timeToSec(displayVal) : parseFloat(displayVal);
 
@@ -3806,7 +3820,7 @@ try {
             }
         }
 
-        // --- 2. GIV XP DIREKTE VIA FIREBASE (Kun for officielle tests med ny rekord) ---
+        // --- 2. GIV XP DIREKTE VIA FIREBASE ---
         if (isNewRecord) {
             await db.ref('xp_points/' + uid).transaction(currentXP => (currentXP || 0) + 50);
             toast(`NY REKORD! (+50 XP) ⚡`, "xp");
@@ -3816,9 +3830,13 @@ try {
         await db.ref('run_tests').push(data);
         if (!isNewRecord) toast("Stærkt arbejdet, flere km i banken! 🏃‍♂️💨");
         
-        document.getElementById('modal-run-test').classList.add('hidden');
-        if (window.analysisModule) analysisModule.init();
-        if (window.analyseModule) analyseModule.init();
+        // SIKKER UI LUKNING - Forhindrer appen i at crashe!
+        const modal = document.getElementById('modal-run-test');
+        if (modal) modal.classList.add('hidden');
+        try {
+            if (window.analysisModule) analysisModule.init();
+            if (window.analyseModule) analyseModule.init();
+        } catch(e) { console.log("Kunne ikke opdatere grafer, men data er gemt."); }
         
     } catch (err) {
         console.error("Fejl ved gem:", err);
@@ -5661,6 +5679,7 @@ firebase.auth().onAuthStateChanged(user => {
                 }
             });
 
+ // Din eksisterende kode, som du IKKE skal slette:
             db.ref('trainings').on('value', snap => {
                 const data = snap.val() || {};
                 AppState.trainings = data; // Gemmer data i den "skuffe" graferne kigger i
@@ -5670,6 +5689,18 @@ firebase.auth().onAuthStateChanged(user => {
                 const side = document.getElementById('module-activity');
                 if (side && side.style.display === 'block' && window.analysisModule) {
                     analysisModule.renderActivityDashboard();
+                }
+            });
+
+            // =========================================================================
+            // 🏃‍♂️ FIX: HENTER LØBE-DATA TIL CHALLENGE MODULET LIVE
+            // =========================================================================
+            db.ref('run_tests').on('value', snap => {
+                AppState.run_tests = snap.val() || {}; // Nu fyldes AppState RIGTIGT med dine løb!
+                
+                // Opdaterer live-baren med det samme, når der tændes for nye km!
+                if (typeof challengeModule !== 'undefined') {
+                    try { challengeModule.init(); } catch(e) {}
                 }
             });
         });
